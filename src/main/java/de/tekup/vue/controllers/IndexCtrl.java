@@ -29,5 +29,11 @@ public class IndexCtrl {
 		UserDB.remove(id);
 		return "redirect:/show/users";
 	}
+	
+	@GetMapping("/add/user")
+	public String addUser(Model model) {
+		return "user/add-user";
+	}
+	
 
 }

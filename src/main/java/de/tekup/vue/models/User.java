@@ -13,7 +13,7 @@ public class User {
 	
 	private String name;
 	
-	private LocalDate dateOfBirth;
+	private LocalDate dateOfBirth; 
 	
 	private String email;
 
