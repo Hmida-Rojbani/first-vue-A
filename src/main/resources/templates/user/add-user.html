@@ -92,9 +92,27 @@
 
     <section class="inner-page">
       <div class="container">
-        <p>
-          Example inner page template
-        </p>
+        <form class="border border-light p-5" th:object="${user}"
+        method="post" th:action="@{/add/user}">
+
+   				 <p class="h4 mb-4 text-center">Add User</p>
+					 <input hidden th:field="*{id}"  type="text" id="name" class="form-control" required="required">
+					<label for="name">Name*</label>
+                    <input th:field="*{name}"  type="text" id="name" class="form-control" required="required">
+                    <h6 th:if="${#fields.hasErrors('name')}" class="text-sm-start alert alert-danger fs-5" th:errors="*{name}" > </h6>
+					<label for="password">Password*</label>
+					 <h6 th:if="${#fields.hasErrors('password')}" class="text-sm-start alert alert-danger" th:errors="*{password}" > </h6>
+                    <input th:field="*{password}"  type="password" id="password" class="form-control" required="required" >
+					<label for="email">E-mail</label>
+                    <input th:field="*{email}"  type="email" id="email" class="form-control mb-4" >
+					 <h6 th:if="${#fields.hasErrors('email')}" class="text-sm-start alert alert-danger fs-5" th:errors="*{email}" > </h6>
+					<label for="date">Date of birth*</label>
+                    <input th:field="*{date}"  type="date" id="date" class="form-control mb-4" required="required">
+					 <h6 th:if="${#fields.hasErrors('dateOfBirth')}" class="text-sm-start alert alert-danger fs-5" th:errors="*{dateOfBirth}" > </h6>
+				<div class="d-grid gap-2">
+   				 <button class="btn btn-success" type="submit">Save</button>
+   				 </div>
+		</form>
       </div>
     </section>
 

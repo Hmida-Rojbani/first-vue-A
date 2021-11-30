@@ -1,10 +1,16 @@
 package de.tekup.vue.controllers;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import de.tekup.vue.models.User;
 import de.tekup.vue.models.UserDB;
 import de.tekup.vue.models.WelcomeMsg;
 
@@ -32,8 +38,25 @@ public class IndexCtrl {
 	
 	@GetMapping("/add/user")
 	public String addUser(Model model) {
+		model.addAttribute("user", new User());
 		return "user/add-user";
 	}
 	
+	@PostMapping("/add/user")
+	public String postAddUser(@ModelAttribute("user") @Valid User user, BindingResult result) {
+		if(result.hasErrors()) {
+			return "user/add-user";
+		}
+		
+		UserDB.add(user);
+		return "redirect:/show/users";
+	}
+	
+	
+	@GetMapping("/edit/user/{id}")
+	public String editUser(@PathVariable int id, Model model) {
+		model.addAttribute("user", UserDB.get(id));
+		return "user/add-user";
+	}
 
 }
